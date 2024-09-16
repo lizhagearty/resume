@@ -52,7 +52,7 @@ export const DATA = {
         navbar: true,
       },
 
-      Youtube: {
+      Instagram: {
         name: "Instagram",
         url: "https://www.instagram.com/lizhagearty/",
         icon: Icons.instagram,
