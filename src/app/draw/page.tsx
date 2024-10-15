@@ -11,25 +11,22 @@ const DrawingBoard = () => {
 
   useEffect(() => {
     const initSocket = async () => {
-      try {
-        await fetch('/api/socket');
-        const newSocket = io();
-        setSocket(newSocket);
+      await fetch('/api/socket');
+      const newSocket = io();
+      
+      newSocket.on('connect', () => {
+        console.log('Connected to Socket.IO server');
+      });
 
-        newSocket.on('connect', () => {
-          console.log('Connected to Socket.IO server');
-        });
+      newSocket.on('connect_error', (error) => {
+        console.error('Socket.IO connection error:', error);
+      });
 
-        newSocket.on('connect_error', (error) => {
-          console.error('Socket.IO connection error:', error);
-        });
+      setSocket(newSocket);
 
-        return () => {
-          newSocket.disconnect();
-        };
-      } catch (error) {
-        console.error('Failed to initialize socket:', error);
-      }
+      return () => {
+        newSocket.disconnect();
+      };
     };
 
     initSocket();

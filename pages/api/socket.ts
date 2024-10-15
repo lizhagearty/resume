@@ -1,41 +1,31 @@
-import { Server as SocketIOServer } from 'socket.io';
-import type { NextApiRequest, NextApiResponse } from 'next';
-import type { Server as HTTPServer } from 'http';
-import type { Socket as NetSocket } from 'net';
+import { Server as SocketIOServer } from "socket.io";
+import type { NextApiRequest, NextApiResponse } from "next";
 
-interface SocketServer extends HTTPServer {
-  io?: SocketIOServer | undefined;
-}
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
 
-interface SocketWithIO extends NetSocket {
-  server: SocketServer;
-}
+const SocketHandler = (req: NextApiRequest, res: NextApiResponse) => {
+  if (!(res.socket as any).server.io) {
+    console.log("Initializing Socket.IO server...");
+    const io = new SocketIOServer((res.socket as any).server);
+    (res.socket as any).server.io = io;
 
-interface NextApiResponseWithSocket extends NextApiResponse {
-  socket: SocketWithIO;
-}
-
-const SocketHandler = (req: NextApiRequest, res: NextApiResponseWithSocket) => {
-  if (res.socket.server.io) {
-    console.log('Socket is already running');
-  } else {
-    console.log('Socket is initializing');
-    const io = new SocketIOServer(res.socket.server);
-    res.socket.server.io = io;
-
-    io.on('connection', (socket) => {
-      console.log('A user connected', socket.id);
-
-      socket.on('draw', (data) => {
-        console.log('Received draw event from', socket.id, data);
-        socket.broadcast.emit('draw', data);
+    io.on("connection", (socket) => {
+      console.log("New client connected");
+      
+      socket.on("draw", (data) => {
+        socket.broadcast.emit("draw", data);
       });
 
-      socket.on('disconnect', () => {
-        console.log('User disconnected', socket.id);
+      socket.on("disconnect", () => {
+        console.log("Client disconnected");
       });
     });
   }
+
   res.end();
 };
 

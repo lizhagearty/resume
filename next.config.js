@@ -10,7 +10,6 @@ const nextConfig = {
     }
     return config;
   },
-  // Add these lines
   swcMinify: true,
   compiler: {
     removeConsole: process.env.NODE_ENV !== 'development',

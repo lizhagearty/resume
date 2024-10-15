@@ -1,29 +1,34 @@
-const express = require('express');
-const http = require('http');
+const { createServer } = require('http');
+const { parse } = require('url');
+const next = require('next');
 const { Server } = require('socket.io');
 
-const app = express();
-const server = http.createServer(app);
-const io = new Server(server, {
-  cors: {
-    origin: 'http://localhost:3000', // Replace with your Next.js app URL
-    methods: ['GET', 'POST'],
-  },
-});
+const dev = process.env.NODE_ENV !== 'production';
+const app = next({ dev });
+const handle = app.getRequestHandler();
 
-io.on('connection', (socket) => {
-  console.log('A user connected');
-
-  socket.on('draw', (data) => {
-    socket.broadcast.emit('draw', data);
+app.prepare().then(() => {
+  const server = createServer((req, res) => {
+    const parsedUrl = parse(req.url, true);
+    handle(req, res, parsedUrl);
   });
 
-  socket.on('disconnect', () => {
-    console.log('A user disconnected');
-  });
-});
+  const io = new Server(server);
 
-const PORT = process.env.PORT || 3001;
-server.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  io.on('connection', (socket) => {
+    console.log('A user connected');
+
+    socket.on('draw', (data) => {
+      socket.broadcast.emit('draw', data);
+    });
+
+    socket.on('disconnect', () => {
+      console.log('User disconnected');
+    });
+  });
+
+  server.listen(3000, (err) => {
+    if (err) throw err;
+    console.log('> Ready on http://localhost:3000');
+  });
 });
