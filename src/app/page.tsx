@@ -111,6 +111,19 @@ export default function Page() {
           </div>
         </div>
       </section> */}
+      <section id="drawing-board">
+        <BlurFade delay={BLUR_FADE_DELAY * 13}>
+          <div className="flex flex-col items-center justify-center space-y-4 text-center">
+            <h2 className="text-xl font-bold">Collaborative Drawing Board</h2>
+            <p className="text-muted-foreground">
+              Try out our real-time collaborative drawing board!
+            </p>
+            <Link href="/draw" className="inline-block rounded-lg bg-foreground text-background px-4 py-2 text-sm font-medium">
+              Go to Drawing Board
+            </Link>
+          </div>
+        </BlurFade>
+      </section>
     </main>
   );
 }
