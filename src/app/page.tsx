@@ -111,6 +111,23 @@ export default function Page() {
           </div>
         </div>
       </section> */}
+      <section id="guestbook">
+        <div className="w-full py-12">
+          <BlurFade delay={BLUR_FADE_DELAY * 11}>
+            <div className="flex items-center justify-center">
+              <Link
+                href="/guestbook"
+                className="inline-flex items-center justify-center space-x-2 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+                <span>Leave a message</span>
+              </Link>
+            </div>
+          </BlurFade>
+        </div>
+      </section>
     </main>
   );
 }
