@@ -169,8 +169,20 @@ export const DATA = {
       logoUrl: "/storycut.png",
       start: "2024",
       end: "Present",
-      description: 
+      description:
         "• Created novel solution for long-form content creators to automate rough cut generation, saving users hours in editing.\n• Designed in Figma\n• Built with React, TypeScript, Next.js, and Tailwind"
+    },
+    {
+      company: "Squarespace",
+      href: "https://www.squarespace.com",
+      badges: [],
+      location: "New York, NY",
+      title: "Senior Software Engineer",
+      team: "Payments, Frontend Product Engineering",
+      logoUrl: "/squarespace.png",
+      start: "2025",
+      end: "2026",
+      description: ""
     }
   ],
 } as const;
