@@ -174,7 +174,7 @@ export const DATA = {
     },
     {
       company: "Squarespace",
-      href: "https://www.squarespace.com",
+      href: "#",
       badges: [],
       location: "New York, NY",
       title: "Senior Software Engineer",
