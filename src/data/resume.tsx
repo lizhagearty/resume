@@ -155,7 +155,7 @@ export const DATA = {
       team: "Republic Records, Insomniac, GRiZ, etc.",
       logoUrl: "/sparkle.png",
       start: "2021",
-      end: "Present",
+      end: "2025",
       description:
         "• Led end-to-end content creation, from ideation and pitching to filming, editing, and posting, resulting in over 150 million views\n• Clients include Insomniac, Republic Records, Red Light Management, GRiZ, and Leah Kate. Creating content in the intimate setting of artist's homes to global music festivals such as EDC, Bonnaroo, and Electric Forest.\n• Grew personal TikTok to 63k followers and 15 million views"
     },
@@ -168,7 +168,7 @@ export const DATA = {
       team: "",
       logoUrl: "/storycut.png",
       start: "2024",
-      end: "Present",
+      end: "2025",
       description:
         "• Created novel solution for long-form content creators to automate rough cut generation, saving users hours in editing.\n• Designed in Figma\n• Built with React, TypeScript, Next.js, and Tailwind"
     },
